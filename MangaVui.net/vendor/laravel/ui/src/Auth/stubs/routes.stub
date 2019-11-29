@@ -1,0 +1,36 @@
+
+Route::get('/v', function() {
+	$laravel = app();
+	return "Version: Laravel " . $laravel::VERSION;
+});
+
+Route::get('/clear/cache', function() {
+	Artisan::call('cache:clear');
+	return "Cache is cleared.";
+});
+
+Route::get('/clear/view', function() {
+	Artisan::call('view:clear');
+	return "Views are cleared.";
+});
+
+Auth::routes();
+
+Route::get('/', 'HomeController@getIndex');
+Route::get('/home', 'HomeController@getIndex')->name('home');
+
+Route::get('/admin/taxonomies', 'TaxonomyController@getIndex');
+Route::get('/admin/taxonomies/create', 'TaxonomyController@getCreate');
+Route::post('/admin/taxonomies/create', 'TaxonomyController@postCreate');
+Route::get('/admin/taxonomies/edit/{id}', 'TaxonomyController@getEdit');
+Route::post('/admin/taxonomies/edit', 'TaxonomyController@postEdit');
+Route::get('/admin/taxonomies/delete/{id}', 'TaxonomyController@getDelete');
+Route::post('/admin/taxonomies/delete', 'TaxonomyController@postDelete');
+
+Route::get('/admin/users', 'UserController@getIndex');
+Route::get('/admin/users/create', 'UserController@getCreate');
+Route::post('/admin/users/create', 'UserController@postCreate');
+Route::get('/admin/users/edit/{id}', 'UserController@getEdit');
+Route::post('/admin/users/edit', 'UserController@postEdit');
+Route::get('/admin/users/delete/{id}', 'UserController@getDelete');
+Route::post('/admin/users/delete', 'UserController@postDelete');
